@@ -3,6 +3,7 @@ options(digits = 15)
 
 stations <- read_xlsx(here("data", "Copy of OKOKYST_Hydrografi_Stasjoner_v5.xlsx"), sheet = "KML")
 cellcounts <- read_xlsx(here("data", "Okokyst_cellcounts.xlsx"))
+names(cellcounts)
 metadat <- read_xlsx(here("data", "Okokyst_metadata.xlsx"), col_types = c("text", "text", "date", "text", "text",
                                                                           "numeric", "text", "text", "text", rep("numeric", 11))) %>% 
   mutate(sqrtKLFA = sqrt(KLFA),
@@ -49,3 +50,9 @@ cellc_meta <- left_join(cellc_pivot, metadat2, by = "Sample")
 cellc_meta_total <- cellc_meta %>% group_by(Sample) %>% summarise(Total =sum(value)) %>%
   left_join(., metadat2, by = "Sample") %>% mutate(logTotal = log(Total)) %>% 
   mutate(lat = Latitude.y, long = Longitude.y)
+
+spec12 <- cellc_meta %>% filter(name %in% c("Acanthoica_quattrospina", "Actiniscus_pentasterias"))
+
+ggplot(spec12, aes(x = Tid_provetak, y = value, color = name))+
+  geom_line()+
+  facet_grid(rows = vars(Station_code))
