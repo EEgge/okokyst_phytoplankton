@@ -51,8 +51,37 @@ cellc_meta_total <- cellc_meta %>% group_by(Sample) %>% summarise(Total =sum(val
   left_join(., metadat2, by = "Sample") %>% mutate(logTotal = log(Total)) %>% 
   mutate(lat = Latitude.y, long = Longitude.y)
 
-spec12 <- cellc_meta %>% filter(name %in% c("Acanthoica_quattrospina", "Actiniscus_pentasterias"))
+spec12 <- logcellc_meta %>% filter(name %in% c("Acanthoica_quattrospina", "Actiniscus_pentasterias"))
 
-ggplot(spec12, aes(x = Tid_provetak, y = value, color = name))+
+ts <- ggplot(spec12, aes(x = Tid_provetak, y = logVal, color = name))+
   geom_line()+
   facet_grid(rows = vars(Station_code))
+
+tsly <- ggplotly(ts)
+tsly
+
+ts2 <- ggplot(spec12, aes(x = Tid_provetak, y = logVal, color = name, 
+                         text = sprintf("Taxon: %s", name)))+
+  geom_line()+
+  facet_grid(rows = vars(Station_code))
+
+tsly2 <- ggplotly(ts2, tooltip = "text")
+tsly2
+
+#### Taxonomy
+?across()
+newtax <- tax %>% mutate(across(.cols = Classification, list(~ifelse(Class == "Bacillariophyta", "Diatoms", ifelse(Classification == "NA", NA, ifelse(Division == "Haptophyta" | Class == "Prymnesiophyceae", "Haptophyta",.))))))
+
+logcellc_meta_tax <- left_join(logcellc_meta, newtax, by = c("name")) %>% 
+  dplyr::group_by(Classification_1, Day, Latitude.y, Longitude.y, Station, Tid_provetak, Station_code, Sample) %>% 
+  summarise_at(vars(value), sum) %>% 
+  mutate(logValuegroup = log(value+1)) %>%
+  dplyr::select(-value) %>% 
+  pivot_wider(., names_from = Classification_1, values_from = logValuegroup) %>% 
+  left_join(., metadat2, by = "Sample")
+
+# Testing grouping for time series
+groupbytab <- logcellc_meta_tax %>% group_by(Division, Day, Year, Month, Latitude.y, Longitude.y, Sample, Station, Station_code) %>% summarise_at(vars(value), sum)
+selectgroups <- groupbytab %>% filter(Division %in% c("Cercozoa", "Haptophyta")) %>% mutate(logVal = log(value +1))
+
+

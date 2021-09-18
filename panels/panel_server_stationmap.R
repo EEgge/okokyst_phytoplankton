@@ -9,7 +9,7 @@ output$map <- renderLeaflet({
 filteredData <- reactive({
   monthname <- c("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul",
                  "Aug", "Sep", "Oct", "Nov", "Dec")[[input$month]]
-  st_year <-  cellc_meta_total %>% dplyr::filter(Year == input$year, Month == monthname)
+  st_year <-  logcellc_meta_tax_wide %>% dplyr::filter(Year.y == input$year, Month.y == monthname)
   return(st_year)
 })
 

@@ -1,0 +1,14 @@
+name: okokyst_phytoplankton
+title: okokyst_phytoplankton
+username:
+account: eegge
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 4682472
+bundleId: 5047114
+url: https://eegge.shinyapps.io/okokyst_phytoplankton/
+when: 1631993522.67647
+lastSyncTime: 1631993522.67647
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: .RData|data/Okokyst_taxonomy_full_2017-2020_SG.xlsx|gadm36_NOR_1_sp.rds|quakestestapp.R|src/test_leaflet.R
