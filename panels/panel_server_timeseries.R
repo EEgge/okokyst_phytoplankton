@@ -10,7 +10,7 @@ output$selectorTaxgroup <- renderUI({
 
 taxgroups <- reactive({
   taxlev <- input$grouplev
-  taxvec <- newtax %>% pull(taxlev) %>% unique()
+  taxvec <- tax %>% pull(taxlev) %>% unique()
   list(taxvec = taxvec)
 })
 
