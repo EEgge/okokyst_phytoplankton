@@ -6,18 +6,19 @@
 #
 #    http://shiny.rstudio.com/
 #
+#shiny::runGitHub("okokyst_phytoplankton","EEgge", ref = "main")
 
 library(shiny)
-library(sf)
+#library(sf)
 library(tmap)
-library(mapview)
+#library(mapview)
 library(leaflet)
 library(ggspatial)
 library(ggplot2)
-library(ggmap)
+#library(ggmap)
 library(maps)
-library(spData)
-library(rgdal)
+#library(spData)
+#library(rgdal)
 library(tmaptools)
 library(maptools)
 library(raster)
@@ -85,13 +86,35 @@ logcellc_meta_tax <- left_join(logcellc_meta, tax, by = c("name")) %>%
                         mutate(Station_code = factor(Station_code, levels = unique(cellc_meta_total$Station_code), ordered = T))
 
 rm(logcellc_meta)
+
+# Read cell carbon data
+cellcarbon0 <- read_xlsx(here("data", "okokyst_cellcarbon.xlsx")) 
+cellcarbon1 <- cellcarbon0 %>% tidyr::separate(Tid_provetak, c("Year", "Month", "Day"), "-", remove = FALSE) %>% 
+    tidyr::separate(Day, c("Day", "Time"), " ", remove = T) %>% 
+    mutate(verdi = as.numeric(Verdi)) %>% 
+    mutate(across(Tid_provetak, ~ as.Date(as.character(.), format = '%Y-%m-%d'))) %>% 
+    mutate(Sample = str_c(station_code, Tid_provetak, sep = "."))
+
+cellcarbon_tax <- left_join(cellcarbon1, tax, by = c("name")) %>% 
+    mutate(doy = lubridate::yday(Tid_provetak)) %>% #Add variable day-of-year
+    left_join(., stations, by = c("station_code" = "StationCode")) %>% # Join with station file with Latitude and Longitude
+    dplyr::arrange(., by = Latitude)
+
+firstbloom <- cellcarbon_tax %>% mutate(bloom = ifelse(Verdi > bloomlevel, 1, 0)) %>% 
+    filter(bloom == 1) %>% 
+    mutate(Station_code = factor(station_code, levels = unique(cellcarbon_tax$station_code), ordered = T))
+    
+
 # Define UI
 source("panels/panel_ui_stationmap.R", local = TRUE)
 source("panels/panel_ui_timeseries.R", local = TRUE)
+source("panels/panel_ui_firstbloom.R", local = TRUE)
+
 ui <- navbarPage(
     "Overview over Økokyst plankton count data",
     tabPanel("Økokyst stations", stationmappage),
-    tabPanel("Time series", timeseriespage)
+    tabPanel("Time series", timeseriespage),
+    tabPanel("Time at first bloom", bloomplotpage)
 
 )
 
@@ -100,6 +123,7 @@ server <- function(input, output, session) {
     
     source("panels/panel_server_stationmap.R", local = TRUE)
     source("panels/panel_server_timeseries.R", local = TRUE)
+    source("panels/panel_server_firstbloom.R", local = TRUE)
     
 }
 

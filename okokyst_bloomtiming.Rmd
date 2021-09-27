@@ -1,0 +1,189 @@
+---
+title: "Time of first bloom of major phytoplankton groups along the Norwegian coast"
+author: "EEG"
+date: "27 9 2021"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(readxl)
+library(here)
+library(dplyr)
+library(readr)
+library(ggplot2)
+library(ggpubr)
+library(ggridges)
+```
+
+The aim of these analyses is to look at patterns in the timing of the first bloom event of the year, between and within the major phytoplankton groups Bacillariophyceae (Diatoms) and Dinophyceae (Dinoflagellates), at the Økokyst stations, ordered from north to south. This may reveal temporal or spatial niche separation. 
+A 'bloom event' is here defined as registration of cell carbon > 85 microg C m^-3, which is the bloom level defined according to Lømsland & Johnsen (2016). Other metrics/parameters may also be plotted.
+
+### Read data files
+
+#### File of stations with latitude and longitude (I had problems with the UTM coordinates)
+NB. Lat and long for the stations starting with SBR are missing, need to find them, or convert UTM coordinates properly.
+```{r, warning=FALSE, message=FALSE}
+stations <- read_xlsx(here("data", "Copy of OKOKYST_Hydrografi_Stasjoner_v5.xlsx"), sheet = "KML")
+```
+
+
+#### Read data file of cell carbon
+Downloaded from the 'Vannmiljø'-site of Miljødirektoratet.
+```{r, warning=FALSE, message=FALSE}
+cellcarbon0 <- read_xlsx(here("data", "okokyst_cellcarbon.xlsx")) 
+
+cellcarbon1 <- cellcarbon0 %>% tidyr::separate(Tid_provetak, c("Year", "Month", "Day"), "-", remove = FALSE) %>% 
+  tidyr::separate(Day, c("Day", "Time"), " ", remove = T) %>% mutate(verdi = as.numeric(Verdi)) %>% 
+    mutate(across(Tid_provetak, ~ as.Date(as.character(.), format = '%Y-%m-%d')))
+```
+
+#### Read data file of taxonomy of the species/categories, join with cell carbon file
+The taxonomy file has been mostly prepared by Sandra. Will need some further edits, but for this purpose, i.e. grouping taxa according to genus or class, it should be fine. 
+```{r, warning=FALSE, message=FALSE}
+tax <- read_delim(here("data", "okokyst_taxonomy.txt"), delim = "\t")
+cellcarbon_tax <- left_join(cellcarbon1, tax, by = c("name")) %>% 
+  mutate(doy = lubridate::yday(Tid_provetak)) %>% #Add variable day-of-year
+  left_join(., stations, by = c("station_code" = "StationCode")) %>% # Join with station file with Latitude and Longitude
+  dplyr::arrange(., by = Latitude)
+
+```
+
+#### Define bloom level. In the table of cell carbon from Vannmiljø cell carbon is given in units of microgC L^-1.
+```{r}
+bloomlevel <- 0.085 #ygC/L, cf. Lømsland & Johnsen
+```
+
+
+### Compare time of first bloom in diatoms and dinoflagellates, for each station (ordered from north to south)
+```{r}
+level1 <- "Class"
+level2 <- "Class"
+
+
+firstbloom_diat <- cellcarbon_tax %>% mutate(bloom = ifelse(Verdi > bloomlevel, 1, 0)) %>% 
+  filter(.data[[level1]] %in% c("Bacillariophyta")) %>% filter(bloom == 1) %>% 
+  group_by(.data[[level2]], name, Year, station_code, StationName_new) %>% summarise_at(vars(doy), min) %>%  # add name when level2 != name
+  mutate(Station_code = factor(station_code, levels = unique(cellcarbon_tax$station_code), ordered = T))
+
+firstbloom_dino <- cellcarbon_tax %>% mutate(bloom = ifelse(Verdi > bloomlevel, 1, 0)) %>% 
+  filter(.data[[level1]] %in% c("Dinophyceae")) %>% filter(bloom == 1) %>% 
+  group_by(.data[[level2]], name, Year, station_code, StationName_new) %>% summarise_at(vars(doy), min) %>%  # add name when level2 != name
+  mutate(Station_code = factor(station_code, levels = unique(cellcarbon_tax$station_code), ordered = T))
+
+firstbloom_both <- cellcarbon_tax %>% mutate(bloom = ifelse(Verdi > bloomlevel, 1, 0)) %>% 
+  filter(.data[[level1]] %in% c("Bacillariophyta", "Dinophyceae")) %>% filter(bloom == 1) %>% 
+  group_by(.data[[level2]], name, Year, station_code, StationName_new) %>% summarise_at(vars(doy), min) %>%  # add name when level2 != name
+  mutate(Station_code = factor(station_code, levels = unique(cellcarbon_tax$station_code), ordered = T))
+
+```
+
+
+```{r, fig.cap= "First registration of the year of cell carbon above 'bloom level' for each species/taxon of diatom registered in the Okokyst data."}
+cbPalette <- c("#999999", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
+
+firstbloom_diat_plt <- ggplot(firstbloom_diat, aes(y = Station_code, x = doy, color = .data[[level2]], shape = Year)) +
+  geom_jitter(alpha = 1/2)+
+  scale_colour_manual(values = cbPalette[3])
+
+firstbloom_diat_plt
+```
+
+```{r, fig.cap= "First registration of the year of cell carbon above 'bloom level' for each species/taxon of dinoflagellate registered in the Okokyst data."}
+firstbloom_dino_plt <- ggplot(firstbloom_dino, aes(x = Station_code, y = doy, color = .data[[level2]], shape = Year, 
+                       text = sprintf("Taxon: %s<br>Station: %s<br> Doy: %s", .data[[level2]], StationName_new, doy))) +
+  geom_jitter(alpha = 1/2)+
+  coord_flip()+
+  scale_colour_manual(values = cbPalette[2])
+
+firstbloom_dino_plt
+```
+
+```{r, fig.cap= "First registration of the year of cell carbon above 'bloom level' for each species/taxon of diatom and dinoflagellate registered in the Okokyst data." }
+firstbloom_plt <- ggplot(firstbloom_both, aes(x = Station_code, y = doy, color = .data[[level2]], shape = Year, 
+                       text = sprintf("Taxon: %s<br>Station: %s<br> Doy: %s", .data[[level2]], StationName_new, doy))) +
+  geom_jitter(alpha = 1/2, height = 1.5, width = 1.5)+
+  coord_flip()+
+  scale_colour_manual(values = cbPalette[c(3,2)])
+
+firstbloom_plt
+
+```
+### Ridge plots
+
+```{r fig 3, fig.height= 20, fig.width=8, warning=FALSE, message=FALSE, fig.cap= "Ridge density plots of day-of-year of first registration of cell carbon above bloom level for species/taxa within diatoms and dinoflagellates. The height of the ridge reflects the number of species with 'first bloom day' at a given day of year."}
+for_ridges <- firstbloom_both %>% group_by(Class, Station_code, doy) %>% count() %>% 
+  mutate(Station_code = factor(Station_code, levels = rev(unique(cellcarbon_tax$station_code)), ordered = T))
+  
+ggplot(for_ridges, aes(y = Class, x = doy, fill = Class))+
+geom_density_ridges(stat = "binline", scale = 1, binwidth = 5)+
+  xlim(0, 366)+
+  facet_grid(rows = vars(Station_code))
+```
+Conclusions:\ 
+- Diatoms vs. Dinoflagellates: Overlap between bloom timings of diatoms and dinoflagellates.\
+- North - South gradient: Tendency for a higher number of species blooming earlier (as early as January) with decreasing latitude.
+
+
+### Compare time of first bloom of abundant genera within the diatoms
+```{r}
+level1 <- "Genus"
+level2 <- "Genus"
+
+
+firstbloom_comp_diat <- cellcarbon_tax %>% mutate(bloom = ifelse(Verdi > bloomlevel, 1, 0)) %>% 
+  filter(.data[[level1]] %in% c("Skeletonema", "Chaetoceros", "Pseudo-nitzschia")) %>% filter(bloom == 1) %>% 
+  group_by(.data[[level2]], name, Year, station_code, StationName_new) %>% summarise_at(vars(doy), min) %>%  # add name when level2 != name
+  mutate(Station_code = factor(station_code, levels = unique(cellcarbon_tax$station_code), ordered = T))
+
+
+```
+
+```{r, fig.cap= "First registration of the year of cell carbon above 'bloom level' for each species/taxon within the diatom genera Chaetoceros, Pseudo-nitzschia and Skeletonema." }
+firstbloom_comp_diat_plot <- ggplot(firstbloom_comp_diat, aes(x = Station_code, y = doy, color = .data[[level2]], shape = Year, 
+                       text = sprintf("Taxon: %s<br>Station: %s<br> Doy: %s", .data[[level2]], StationName_new, doy))) +
+  geom_jitter(alpha = 1/2, height = 1.5, width = 1.5)+
+  coord_flip()+
+  scale_colour_manual(values = cbPalette[c(3,2, 4)])
+
+firstbloom_comp_diat_plot
+
+```
+
+Conclusions:\
+- Blooming of members of these specific genera starts generally earlier in the south.\
+- Some temporal separation between genera.
+
+Cerataulina
+```{r}
+level1 <- "Genus"
+level2 <- "Genus"
+
+
+firstbloom_cerataulina <- cellcarbon_tax %>% mutate(bloom = ifelse(Verdi > bloomlevel, 1, 0)) %>% 
+  filter(.data[[level1]] %in% c("Cerataulina")) %>% filter(bloom == 1) %>% 
+  group_by(.data[[level2]], name, Year, station_code, StationName_new) %>% summarise_at(vars(doy), min) %>%  # add name when level2 != name
+  mutate(Station_code = factor(station_code, levels = unique(cellcarbon_tax$station_code), ordered = T))
+
+
+```
+
+```{r, fig.cap= "First registration of the year of cell carbon above 'bloom level' for each species/taxon within the diatom genera Chaetoceros, Pseudo-nitzschia and Skeletonema." }
+firstbloom_cerataulina_plot <- ggplot(firstbloom_cerataulina, aes(x = Station_code, y = doy, color = .data[[level2]], shape = Year, 
+                       text = sprintf("Taxon: %s<br>Station: %s<br> Doy: %s", .data[[level2]], StationName_new, doy))) +
+  geom_jitter(height = 0.2, width = 0.2)+
+  coord_flip()+
+  scale_colour_manual(values = cbPalette[c(3,2, 4)])
+
+firstbloom_cerataulina_plot
+
+```
+Conclusion: \
+- Strong north-south gradient in timing of first bloom of Cerataulina. (BT133 and 132 did not have lat and long, are probably located further south.)
+
+### Further work:
+-Statistical tests: Co-occurrence/exclusion analyses? Other suggestions are also welcome.
+-Separate the stations into Fjord, Sheltered, Sheltered - fw-influenced, Exposed (c. f. Lømsland & Johnsen), to see if the patterns become clearer
+-Compare more genera, and species or size categories within genera. I am conferring the Lømsland & Johnsen paper to find the overall most abundant genera in each region, but others could also be of interest.

@@ -1,0 +1,372 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={Time of first bloom of major phytoplankton groups along the Norwegian coast},
+  pdfauthor={EEG},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifluatex
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+
+\title{Time of first bloom of major phytoplankton groups along the
+Norwegian coast}
+\author{EEG}
+\date{27 9 2021}
+
+\begin{document}
+\maketitle
+
+The aim of these analyses is to look at patterns in the timing of the
+first bloom event of the year, between and within the major
+phytoplankton groups Bacillariophyceae (Diatoms) and Dinophyceae
+(Dinoflagellates), at the Økokyst stations, ordered from north to south.
+This may reveal temporal or spatial niche separation. A `bloom event' is
+here defined as registration of cell carbon \textgreater{} 85 microg C
+m\^{}-3, which is the bloom level defined according to Lømsland \&
+Johnsen (2016). Other metrics/parameters may also be plotted.
+
+\hypertarget{read-data-files}{%
+\subsubsection{Read data files}\label{read-data-files}}
+
+\hypertarget{file-of-stations-with-latitude-and-longitude-i-had-problems-with-the-utm-coordinates}{%
+\paragraph{File of stations with latitude and longitude (I had problems
+with the UTM
+coordinates)}\label{file-of-stations-with-latitude-and-longitude-i-had-problems-with-the-utm-coordinates}}
+
+NB. Lat and long for the stations starting with SBR are missing, need to
+find them, or convert UTM coordinates properly.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{stations }\OtherTok{\textless{}{-}} \FunctionTok{read\_xlsx}\NormalTok{(}\FunctionTok{here}\NormalTok{(}\StringTok{"data"}\NormalTok{, }\StringTok{"Copy of OKOKYST\_Hydrografi\_Stasjoner\_v5.xlsx"}\NormalTok{), }\AttributeTok{sheet =} \StringTok{"KML"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{read-data-file-of-cell-carbon}{%
+\paragraph{Read data file of cell
+carbon}\label{read-data-file-of-cell-carbon}}
+
+Downloaded from the `Vannmiljø'-site of Miljødirektoratet.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{cellcarbon0 }\OtherTok{\textless{}{-}} \FunctionTok{read\_xlsx}\NormalTok{(}\FunctionTok{here}\NormalTok{(}\StringTok{"data"}\NormalTok{, }\StringTok{"okokyst\_cellcarbon.xlsx"}\NormalTok{)) }
+
+\NormalTok{cellcarbon1 }\OtherTok{\textless{}{-}}\NormalTok{ cellcarbon0 }\SpecialCharTok{\%\textgreater{}\%}\NormalTok{ tidyr}\SpecialCharTok{::}\FunctionTok{separate}\NormalTok{(Tid\_provetak, }\FunctionTok{c}\NormalTok{(}\StringTok{"Year"}\NormalTok{, }\StringTok{"Month"}\NormalTok{, }\StringTok{"Day"}\NormalTok{), }\StringTok{"{-}"}\NormalTok{, }\AttributeTok{remove =} \ConstantTok{FALSE}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  tidyr}\SpecialCharTok{::}\FunctionTok{separate}\NormalTok{(Day, }\FunctionTok{c}\NormalTok{(}\StringTok{"Day"}\NormalTok{, }\StringTok{"Time"}\NormalTok{), }\StringTok{" "}\NormalTok{, }\AttributeTok{remove =}\NormalTok{ T) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{mutate}\NormalTok{(}\AttributeTok{verdi =} \FunctionTok{as.numeric}\NormalTok{(Verdi)) }\SpecialCharTok{\%\textgreater{}\%} 
+    \FunctionTok{mutate}\NormalTok{(}\FunctionTok{across}\NormalTok{(Tid\_provetak, }\SpecialCharTok{\textasciitilde{}} \FunctionTok{as.Date}\NormalTok{(}\FunctionTok{as.character}\NormalTok{(.), }\AttributeTok{format =} \StringTok{\textquotesingle{}\%Y{-}\%m{-}\%d\textquotesingle{}}\NormalTok{)))}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{read-data-file-of-taxonomy-of-the-speciescategories-join-with-cell-carbon-file}{%
+\paragraph{Read data file of taxonomy of the species/categories, join
+with cell carbon
+file}\label{read-data-file-of-taxonomy-of-the-speciescategories-join-with-cell-carbon-file}}
+
+The taxonomy file has been mostly prepared by Sandra. Will need some
+further edits, but for this purpose, i.e.~grouping taxa according to
+genus or class, it should be fine.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{tax }\OtherTok{\textless{}{-}} \FunctionTok{read\_delim}\NormalTok{(}\FunctionTok{here}\NormalTok{(}\StringTok{"data"}\NormalTok{, }\StringTok{"okokyst\_taxonomy.txt"}\NormalTok{), }\AttributeTok{delim =} \StringTok{"}\SpecialCharTok{\textbackslash{}t}\StringTok{"}\NormalTok{)}
+\NormalTok{cellcarbon\_tax }\OtherTok{\textless{}{-}} \FunctionTok{left\_join}\NormalTok{(cellcarbon1, tax, }\AttributeTok{by =} \FunctionTok{c}\NormalTok{(}\StringTok{"name"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{doy =}\NormalTok{ lubridate}\SpecialCharTok{::}\FunctionTok{yday}\NormalTok{(Tid\_provetak)) }\SpecialCharTok{\%\textgreater{}\%} \CommentTok{\#Add variable day{-}of{-}year}
+  \FunctionTok{left\_join}\NormalTok{(., stations, }\AttributeTok{by =} \FunctionTok{c}\NormalTok{(}\StringTok{"station\_code"} \OtherTok{=} \StringTok{"StationCode"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%} \CommentTok{\# Join with station file with Latitude and Longitude}
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{arrange}\NormalTok{(., }\AttributeTok{by =}\NormalTok{ Latitude)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{define-bloom-level.-in-the-table-of-cell-carbon-from-vannmiljuxf8-cell-carbon-is-given-in-units-of-microgc-l-1.}{%
+\paragraph{Define bloom level. In the table of cell carbon from
+Vannmiljø cell carbon is given in units of microgC
+L\^{}-1.}\label{define-bloom-level.-in-the-table-of-cell-carbon-from-vannmiljuxf8-cell-carbon-is-given-in-units-of-microgc-l-1.}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{bloomlevel }\OtherTok{\textless{}{-}} \FloatTok{0.085} \CommentTok{\#ygC/L, cf. Lømsland \& Johnsen}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{compare-time-of-first-bloom-in-diatoms-and-dinoflagellates-for-each-station-ordered-from-north-to-south}{%
+\subsubsection{Compare time of first bloom in diatoms and
+dinoflagellates, for each station (ordered from north to
+south)}\label{compare-time-of-first-bloom-in-diatoms-and-dinoflagellates-for-each-station-ordered-from-north-to-south}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{level1 }\OtherTok{\textless{}{-}} \StringTok{"Class"}
+\NormalTok{level2 }\OtherTok{\textless{}{-}} \StringTok{"Class"}
+
+
+\NormalTok{firstbloom\_diat }\OtherTok{\textless{}{-}}\NormalTok{ cellcarbon\_tax }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{mutate}\NormalTok{(}\AttributeTok{bloom =} \FunctionTok{ifelse}\NormalTok{(Verdi }\SpecialCharTok{\textgreater{}}\NormalTok{ bloomlevel, }\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{filter}\NormalTok{(.data[[level1]] }\SpecialCharTok{\%in\%} \FunctionTok{c}\NormalTok{(}\StringTok{"Bacillariophyta"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{filter}\NormalTok{(bloom }\SpecialCharTok{==} \DecValTok{1}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{group\_by}\NormalTok{(.data[[level2]], name, Year, station\_code, StationName\_new) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{summarise\_at}\NormalTok{(}\FunctionTok{vars}\NormalTok{(doy), min) }\SpecialCharTok{\%\textgreater{}\%}  \CommentTok{\# add name when level2 != name}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{Station\_code =} \FunctionTok{factor}\NormalTok{(station\_code, }\AttributeTok{levels =} \FunctionTok{unique}\NormalTok{(cellcarbon\_tax}\SpecialCharTok{$}\NormalTok{station\_code), }\AttributeTok{ordered =}\NormalTok{ T))}
+
+\NormalTok{firstbloom\_dino }\OtherTok{\textless{}{-}}\NormalTok{ cellcarbon\_tax }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{mutate}\NormalTok{(}\AttributeTok{bloom =} \FunctionTok{ifelse}\NormalTok{(Verdi }\SpecialCharTok{\textgreater{}}\NormalTok{ bloomlevel, }\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{filter}\NormalTok{(.data[[level1]] }\SpecialCharTok{\%in\%} \FunctionTok{c}\NormalTok{(}\StringTok{"Dinophyceae"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{filter}\NormalTok{(bloom }\SpecialCharTok{==} \DecValTok{1}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{group\_by}\NormalTok{(.data[[level2]], name, Year, station\_code, StationName\_new) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{summarise\_at}\NormalTok{(}\FunctionTok{vars}\NormalTok{(doy), min) }\SpecialCharTok{\%\textgreater{}\%}  \CommentTok{\# add name when level2 != name}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{Station\_code =} \FunctionTok{factor}\NormalTok{(station\_code, }\AttributeTok{levels =} \FunctionTok{unique}\NormalTok{(cellcarbon\_tax}\SpecialCharTok{$}\NormalTok{station\_code), }\AttributeTok{ordered =}\NormalTok{ T))}
+
+\NormalTok{firstbloom\_both }\OtherTok{\textless{}{-}}\NormalTok{ cellcarbon\_tax }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{mutate}\NormalTok{(}\AttributeTok{bloom =} \FunctionTok{ifelse}\NormalTok{(Verdi }\SpecialCharTok{\textgreater{}}\NormalTok{ bloomlevel, }\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{filter}\NormalTok{(.data[[level1]] }\SpecialCharTok{\%in\%} \FunctionTok{c}\NormalTok{(}\StringTok{"Bacillariophyta"}\NormalTok{, }\StringTok{"Dinophyceae"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{filter}\NormalTok{(bloom }\SpecialCharTok{==} \DecValTok{1}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{group\_by}\NormalTok{(.data[[level2]], name, Year, station\_code, StationName\_new) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{summarise\_at}\NormalTok{(}\FunctionTok{vars}\NormalTok{(doy), min) }\SpecialCharTok{\%\textgreater{}\%}  \CommentTok{\# add name when level2 != name}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{Station\_code =} \FunctionTok{factor}\NormalTok{(station\_code, }\AttributeTok{levels =} \FunctionTok{unique}\NormalTok{(cellcarbon\_tax}\SpecialCharTok{$}\NormalTok{station\_code), }\AttributeTok{ordered =}\NormalTok{ T))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{cbPalette }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"\#999999"}\NormalTok{, }\StringTok{"\#E69F00"}\NormalTok{, }\StringTok{"\#56B4E9"}\NormalTok{, }\StringTok{"\#009E73"}\NormalTok{, }\StringTok{"\#F0E442"}\NormalTok{, }\StringTok{"\#0072B2"}\NormalTok{, }\StringTok{"\#D55E00"}\NormalTok{, }\StringTok{"\#CC79A7"}\NormalTok{)}
+
+\NormalTok{firstbloom\_diat\_plt }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(firstbloom\_diat, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{y =}\NormalTok{ Station\_code, }\AttributeTok{x =}\NormalTok{ doy, }\AttributeTok{color =}\NormalTok{ .data[[level2]], }\AttributeTok{shape =}\NormalTok{ Year)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_jitter}\NormalTok{(}\AttributeTok{alpha =} \DecValTok{1}\SpecialCharTok{/}\DecValTok{2}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{scale\_colour\_manual}\NormalTok{(}\AttributeTok{values =}\NormalTok{ cbPalette[}\DecValTok{3}\NormalTok{])}
+
+\NormalTok{firstbloom\_diat\_plt}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\centering
+\includegraphics{okokyst_bloomtiming_files/figure-latex/unnamed-chunk-6-1.pdf}
+\caption{First registration of the year of cell carbon above `bloom
+level' for each species/taxon of diatom registered in the Okokyst data.}
+\end{figure}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{firstbloom\_dino\_plt }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(firstbloom\_dino, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Station\_code, }\AttributeTok{y =}\NormalTok{ doy, }\AttributeTok{color =}\NormalTok{ .data[[level2]], }\AttributeTok{shape =}\NormalTok{ Year, }
+                       \AttributeTok{text =} \FunctionTok{sprintf}\NormalTok{(}\StringTok{"Taxon: \%s\textless{}br\textgreater{}Station: \%s\textless{}br\textgreater{} Doy: \%s"}\NormalTok{, .data[[level2]], StationName\_new, doy))) }\SpecialCharTok{+}
+  \FunctionTok{geom\_jitter}\NormalTok{(}\AttributeTok{alpha =} \DecValTok{1}\SpecialCharTok{/}\DecValTok{2}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{coord\_flip}\NormalTok{()}\SpecialCharTok{+}
+  \FunctionTok{scale\_colour\_manual}\NormalTok{(}\AttributeTok{values =}\NormalTok{ cbPalette[}\DecValTok{2}\NormalTok{])}
+
+\NormalTok{firstbloom\_dino\_plt}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\centering
+\includegraphics{okokyst_bloomtiming_files/figure-latex/unnamed-chunk-7-1.pdf}
+\caption{First registration of the year of cell carbon above `bloom
+level' for each species/taxon of dinoflagellate registered in the
+Okokyst data.}
+\end{figure}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{firstbloom\_plt }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(firstbloom\_both, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Station\_code, }\AttributeTok{y =}\NormalTok{ doy, }\AttributeTok{color =}\NormalTok{ .data[[level2]], }\AttributeTok{shape =}\NormalTok{ Year, }
+                       \AttributeTok{text =} \FunctionTok{sprintf}\NormalTok{(}\StringTok{"Taxon: \%s\textless{}br\textgreater{}Station: \%s\textless{}br\textgreater{} Doy: \%s"}\NormalTok{, .data[[level2]], StationName\_new, doy))) }\SpecialCharTok{+}
+  \FunctionTok{geom\_jitter}\NormalTok{(}\AttributeTok{alpha =} \DecValTok{1}\SpecialCharTok{/}\DecValTok{2}\NormalTok{, }\AttributeTok{height =} \FloatTok{1.5}\NormalTok{, }\AttributeTok{width =} \FloatTok{1.5}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{coord\_flip}\NormalTok{()}\SpecialCharTok{+}
+  \FunctionTok{scale\_colour\_manual}\NormalTok{(}\AttributeTok{values =}\NormalTok{ cbPalette[}\FunctionTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{,}\DecValTok{2}\NormalTok{)])}
+
+\NormalTok{firstbloom\_plt}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{okokyst_bloomtiming_files/figure-latex/unnamed-chunk-8-1.pdf}
+\#\#\# Ridge plots
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{for\_ridges }\OtherTok{\textless{}{-}}\NormalTok{ firstbloom\_both }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{group\_by}\NormalTok{(Class, Station\_code, doy) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{count}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{Station\_code =} \FunctionTok{factor}\NormalTok{(Station\_code, }\AttributeTok{levels =} \FunctionTok{rev}\NormalTok{(}\FunctionTok{unique}\NormalTok{(cellcarbon\_tax}\SpecialCharTok{$}\NormalTok{station\_code)), }\AttributeTok{ordered =}\NormalTok{ T))}
+  
+\FunctionTok{ggplot}\NormalTok{(for\_ridges, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{y =}\NormalTok{ Class, }\AttributeTok{x =}\NormalTok{ doy, }\AttributeTok{fill =}\NormalTok{ Class))}\SpecialCharTok{+}
+\FunctionTok{geom\_density\_ridges}\NormalTok{(}\AttributeTok{stat =} \StringTok{"binline"}\NormalTok{, }\AttributeTok{scale =} \DecValTok{1}\NormalTok{, }\AttributeTok{binwidth =} \DecValTok{5}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{xlim}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{366}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{facet\_grid}\NormalTok{(}\AttributeTok{rows =} \FunctionTok{vars}\NormalTok{(Station\_code))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{okokyst_bloomtiming_files/figure-latex/fig 3-1.pdf}
+Conclusions:~ - Diatoms vs.~Dinoflagellates: Overlap between bloom
+timings of diatoms and dinoflagellates.\\
+- North - South gradient: Tendency for a higher number of species
+blooming earlier (as early as January) with decreasing latitude.
+
+\hypertarget{compare-time-of-first-bloom-of-abundant-genera-within-the-diatoms}{%
+\subsubsection{Compare time of first bloom of abundant genera within the
+diatoms}\label{compare-time-of-first-bloom-of-abundant-genera-within-the-diatoms}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{level1 }\OtherTok{\textless{}{-}} \StringTok{"Genus"}
+\NormalTok{level2 }\OtherTok{\textless{}{-}} \StringTok{"Genus"}
+
+
+\NormalTok{firstbloom\_comp\_diat }\OtherTok{\textless{}{-}}\NormalTok{ cellcarbon\_tax }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{mutate}\NormalTok{(}\AttributeTok{bloom =} \FunctionTok{ifelse}\NormalTok{(Verdi }\SpecialCharTok{\textgreater{}}\NormalTok{ bloomlevel, }\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{filter}\NormalTok{(.data[[level1]] }\SpecialCharTok{\%in\%} \FunctionTok{c}\NormalTok{(}\StringTok{"Skeletonema"}\NormalTok{, }\StringTok{"Chaetoceros"}\NormalTok{, }\StringTok{"Pseudo{-}nitzschia"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{filter}\NormalTok{(bloom }\SpecialCharTok{==} \DecValTok{1}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{group\_by}\NormalTok{(.data[[level2]], name, Year, station\_code, StationName\_new) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{summarise\_at}\NormalTok{(}\FunctionTok{vars}\NormalTok{(doy), min) }\SpecialCharTok{\%\textgreater{}\%}  \CommentTok{\# add name when level2 != name}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{Station\_code =} \FunctionTok{factor}\NormalTok{(station\_code, }\AttributeTok{levels =} \FunctionTok{unique}\NormalTok{(cellcarbon\_tax}\SpecialCharTok{$}\NormalTok{station\_code), }\AttributeTok{ordered =}\NormalTok{ T))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{firstbloom\_comp\_diat\_plot }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(firstbloom\_comp\_diat, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Station\_code, }\AttributeTok{y =}\NormalTok{ doy, }\AttributeTok{color =}\NormalTok{ .data[[level2]], }\AttributeTok{shape =}\NormalTok{ Year, }
+                       \AttributeTok{text =} \FunctionTok{sprintf}\NormalTok{(}\StringTok{"Taxon: \%s\textless{}br\textgreater{}Station: \%s\textless{}br\textgreater{} Doy: \%s"}\NormalTok{, .data[[level2]], StationName\_new, doy))) }\SpecialCharTok{+}
+  \FunctionTok{geom\_jitter}\NormalTok{(}\AttributeTok{alpha =} \DecValTok{1}\SpecialCharTok{/}\DecValTok{2}\NormalTok{, }\AttributeTok{height =} \FloatTok{1.5}\NormalTok{, }\AttributeTok{width =} \FloatTok{1.5}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{coord\_flip}\NormalTok{()}\SpecialCharTok{+}
+  \FunctionTok{scale\_colour\_manual}\NormalTok{(}\AttributeTok{values =}\NormalTok{ cbPalette[}\FunctionTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{,}\DecValTok{2}\NormalTok{, }\DecValTok{4}\NormalTok{)])}
+
+\NormalTok{firstbloom\_comp\_diat\_plot}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\centering
+\includegraphics{okokyst_bloomtiming_files/figure-latex/unnamed-chunk-10-1.pdf}
+\caption{First registration of the year of cell carbon above `bloom
+level' for each species/taxon within the diatom genera Chaetoceros,
+Pseudo-nitzschia and Skeletonema.}
+\end{figure}
+
+Conclusions:\\
+- Blooming of members of these specific genera starts generally earlier
+in the south.\\
+- Some temporal separation between genera.
+
+Cerataulina
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{level1 }\OtherTok{\textless{}{-}} \StringTok{"Genus"}
+\NormalTok{level2 }\OtherTok{\textless{}{-}} \StringTok{"Genus"}
+
+
+\NormalTok{firstbloom\_cerataulina }\OtherTok{\textless{}{-}}\NormalTok{ cellcarbon\_tax }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{mutate}\NormalTok{(}\AttributeTok{bloom =} \FunctionTok{ifelse}\NormalTok{(Verdi }\SpecialCharTok{\textgreater{}}\NormalTok{ bloomlevel, }\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{filter}\NormalTok{(.data[[level1]] }\SpecialCharTok{\%in\%} \FunctionTok{c}\NormalTok{(}\StringTok{"Cerataulina"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{filter}\NormalTok{(bloom }\SpecialCharTok{==} \DecValTok{1}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{group\_by}\NormalTok{(.data[[level2]], name, Year, station\_code, StationName\_new) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{summarise\_at}\NormalTok{(}\FunctionTok{vars}\NormalTok{(doy), min) }\SpecialCharTok{\%\textgreater{}\%}  \CommentTok{\# add name when level2 != name}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{Station\_code =} \FunctionTok{factor}\NormalTok{(station\_code, }\AttributeTok{levels =} \FunctionTok{unique}\NormalTok{(cellcarbon\_tax}\SpecialCharTok{$}\NormalTok{station\_code), }\AttributeTok{ordered =}\NormalTok{ T))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{firstbloom\_cerataulina\_plot }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(firstbloom\_cerataulina, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Station\_code, }\AttributeTok{y =}\NormalTok{ doy, }\AttributeTok{color =}\NormalTok{ .data[[level2]], }\AttributeTok{shape =}\NormalTok{ Year, }
+                       \AttributeTok{text =} \FunctionTok{sprintf}\NormalTok{(}\StringTok{"Taxon: \%s\textless{}br\textgreater{}Station: \%s\textless{}br\textgreater{} Doy: \%s"}\NormalTok{, .data[[level2]], StationName\_new, doy))) }\SpecialCharTok{+}
+  \FunctionTok{geom\_jitter}\NormalTok{(}\AttributeTok{height =} \FloatTok{0.2}\NormalTok{, }\AttributeTok{width =} \FloatTok{0.2}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{coord\_flip}\NormalTok{()}\SpecialCharTok{+}
+  \FunctionTok{scale\_colour\_manual}\NormalTok{(}\AttributeTok{values =}\NormalTok{ cbPalette[}\FunctionTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{,}\DecValTok{2}\NormalTok{, }\DecValTok{4}\NormalTok{)])}
+
+\NormalTok{firstbloom\_cerataulina\_plot}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{okokyst_bloomtiming_files/figure-latex/unnamed-chunk-12-1.pdf}
+Conclusion:\\
+- Strong north-south gradient in timing of first bloom of Cerataulina.
+(BT133 and 132 did not have lat and long, are probably located further
+south.)
+
+\hypertarget{further-work}{%
+\subsubsection{Further work:}\label{further-work}}
+
+-Statistical tests: Co-occurrence/exclusion analyses? Other suggestions
+are also welcome. -Separate the stations into Fjord, Sheltered,
+Sheltered - fw-influenced, Exposed (c.~f.~Lømsland \& Johnsen), to see
+if the patterns become clearer -Compare more genera, and species or size
+categories within genera. I am conferring the Lømsland \& Johnsen paper
+to find the overall most abundant genera in each region, but others
+could also be of interest.
+
+\end{document}
